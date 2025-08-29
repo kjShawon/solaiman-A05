@@ -1,13 +1,12 @@
-
-// function to get inner text from parent node and convert into number
+// অভিভাবক নোড থেকে inner text পেতে এবং সংখ্যায় রূপান্তর করার ফাংশন
 function getInnerTextIntoNum(id) {
   let getText = document.getElementById(id);
   let text = getText.innerText;
   let numText = parseInt(text);
-  return numText;}
+  return numText;
+}
 
-
-// function for find class list as a loop and get an Array
+// ক্লাস লিস্ট খুঁজে পেতে এবং একটি অ্যারে হিসেবে পাওয়ার ফাংশন
 function findingAllClasses(cls) {
   let className = document.querySelectorAll(cls);
   let texts = [];
@@ -18,8 +17,7 @@ function findingAllClasses(cls) {
   return texts;
 }
 
-// love icon functionality
-
+// লাভ আইকন ফাংশনালিটি
 let loveIcon = document.querySelectorAll(".loveicon");
 for (let icon of loveIcon) {
   icon.addEventListener("click", function () {
@@ -30,30 +28,30 @@ for (let icon of loveIcon) {
   });
 }
 
-// copy btn functionality
+// কপি বাটন ফাংশনালিটি
 let copyBtns = document.querySelectorAll(".copy_btn");
 let numbers = findingAllClasses(".service_num");
 copyBtns.forEach((btn, index) => {
-    btn.addEventListener("click", function () {
-        let copyBox = getInnerTextIntoNum("copy_box");
-        let newText = copyBox + 1 + " " + "copy";
-        document.getElementById("copy_box").children[0].innerText = newText;
-        let copyNum = number[index];
-        navigator.clipboard.writeText(copyNum);
-        alert("Hotline number copied successfully 😊");
-    });
+  btn.addEventListener("click", function () {
+    let copyBox = getInnerTextIntoNum("copy_box");
+    let newText = copyBox + 1 + " " + "copy";
+    document.getElementById("copy_box").children[0].innerText = newText;
+    let copyNum = numbers[index];
+    navigator.clipboard.writeText(copyNum);
+    alert("হটলাইন নাম্বার সফলভাবে কপি করা হয়েছে 😊");
+  });
 });
 
-// call btn functionality
+// কল বাটন ফাংশনালিটি
 let callBtn = document.querySelectorAll(".call_btn");
 let serviceName = findingAllClasses(".service_name");
 let number = findingAllClasses(".service_num");
 callBtn.forEach((btn, index) => {
-    btn.addEventListener("click", function () {
-        let textNum = getInnerTextIntoNum("coin_box");
-        if (textNum <= 0) {
-            alert(" Sorry! you reached your limit 😔");
-            return;
+  btn.addEventListener("click", function () {
+    let textNum = getInnerTextIntoNum("coin_box");
+    if (textNum <= 0) {
+      alert("দুঃখিত! আপনি আপনার লিমিট শেষ করেছেন 😔");
+      return;
     }
     let name = serviceName[index];
     let num = number[index];
@@ -62,11 +60,11 @@ callBtn.forEach((btn, index) => {
     if (newValue < 0) newValue = 0;
     document.getElementById("coin_box").children[0].innerText = newValue;
 
-    let date = new Date().toLocaleTimeString()
-    console.log(name,num,date)
-    
-    let historyList = document.getElementById('history_list')
-    let newChild = document.createElement('div')
+    let date = new Date().toLocaleTimeString();
+    console.log(name, num, date);
+
+    let historyList = document.getElementById("history_list");
+    let newChild = document.createElement("div");
     newChild.innerHTML = `<div class = "flex shadow-sm  p-3 ">
      <div class=" w-[60%]">
               <h1 class="text-sm mb-1">${name}</h1>
@@ -74,17 +72,13 @@ callBtn.forEach((btn, index) => {
             </div>
             <div class="time w-[40%]  ">
               <p class="text-sm">${date}</p>
-            </div></div>`
-    historyList.appendChild(newChild)
-       
-    let clearBtn = document.getElementById('clear_btn')
-    clearBtn.addEventListener('click',function(){
-         document.getElementById("history_list").innerHTML = "";
-        newChild.style.display = 'block'
-    })
-    
+            </div></div>`;
+    historyList.appendChild(newChild);
+
+    let clearBtn = document.getElementById("clear_btn");
+    clearBtn.addEventListener("click", function () {
+      document.getElementById("history_list").innerHTML = "";
+      newChild.style.display = "block";
+    });
+  });
 });
-});
-
-
-
